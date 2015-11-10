@@ -103,8 +103,12 @@ brew install tree
 # MHD Additions
 brew install curl
 brew install wget
+brew install the_silver_searcher
 
 brew tap caskroom/cask
+
+sudo brew cask install karabiner
+sudo brew cask install seil
 
 brew cask install dropbox
 brew cask install alfred
@@ -124,9 +128,9 @@ brew cask install vlc
 brew cask install the-unarchiver
 brew cask install daisydisk
 brew cask install sourcetree
-brew cask install adobe-photoshop-lightroom
 brew cask install flowdock
 brew cask install vox
+brew cask install carbon-copy-cloner
 
 # Quick Look plugins
 brew cask install qlcolorcode
@@ -136,7 +140,7 @@ brew cask install quicklook-json
 brew cask install qlprettypatch
 brew cask install quicklook-csv
 brew cask install betterzipql
-brew cask install qlimagesize
+sudo brew cask install qlimagesize
 brew cask install webpquicklook
 brew cask install suspicious-package
 
