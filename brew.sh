@@ -115,7 +115,6 @@ brew cask install alfred
 brew cask install phpstorm
 brew cask install sourcetree
 brew cask install iterm2
-brew cask install bartender
 brew cask install firefox
 brew cask install google-chrome
 brew cask install skitch
@@ -131,6 +130,9 @@ brew cask install sourcetree
 brew cask install flowdock
 brew cask install vox
 brew cask install carbon-copy-cloner
+brew cask install spectacle
+brew cask install kindle
+brew cask install switchresx
 
 # Quick Look plugins
 brew cask install qlcolorcode
@@ -150,3 +152,11 @@ brew cask install colorpicker-hex
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+# Appstore / manual
+# - ResolutionTab
+# - 1Password
+# - Bartender
+# - Lightroom
+# - XCode
+# - Tweetbot
