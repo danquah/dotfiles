@@ -134,6 +134,9 @@ brew cask install spectacle
 brew cask install kindle
 brew cask install switchresx
 
+brew cask install virtualbox
+brew cask install virtualbox-extension-pack
+
 # Quick Look plugins
 brew cask install qlcolorcode
 brew cask install qlstephen
