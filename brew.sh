@@ -7,6 +7,10 @@ sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php  
+brew tap caskroom/cask
+
 
 # Make sure we’re using the latest Homebrew.
 brew update
@@ -29,7 +33,6 @@ brew install gnu-sed --with-default-names
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
 # running `chsh`.
 brew install bash
-brew tap homebrew/versions
 brew install bash-completion2
 
 # Install `wget` with IRI support.
@@ -105,8 +108,6 @@ brew install curl
 brew install wget
 brew install the_silver_searcher
 
-brew tap caskroom/cask
-
 sudo brew cask install karabiner
 sudo brew cask install seil
 
@@ -133,6 +134,7 @@ brew cask install carbon-copy-cloner
 brew cask install spectacle
 brew cask install kindle
 brew cask install switchresx
+brew cask install gitup
 
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack
@@ -152,6 +154,23 @@ brew cask install suspicious-package
 # Color Picker plugins
 brew cask install colorpicker-hex
 
+brew install dnsmasq
+# Setup our own conf with *.localhost -> 127.0.0.1
+cp conf/dnsmasq.conf /usr/local/etc/dnsmasq.conf
+
+# Configure a LaunchDeamon
+sudo cp -fv /usr/local/opt/dnsmasq/*.plist /Library/LaunchDaemons
+sudo chown root /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+
+# Start the deamon manually.
+sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist  
+
+# Setup local lookups of *.localhost to go to dnsmasq
+sudo mkdir -p /etc/resolver/
+touch /etc/resolver/localhost 
+sudo tee /etc/resolver/localhost >/dev/null <<EOF
+nameserver 127.0.0.1
+EOF
 
 # Remove outdated versions from the cellar.
 brew cleanup
