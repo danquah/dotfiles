@@ -10,6 +10,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 brew tap homebrew/versions
 brew tap homebrew/homebrew-php  
 brew tap caskroom/cask
+brew tap homebrew/services
 
 
 # Make sure we’re using the latest Homebrew.
@@ -108,6 +109,9 @@ brew install curl
 brew install wget
 brew install the_silver_searcher
 
+brew install composer
+brew install ffmpeg --with-faac
+
 sudo brew cask install karabiner
 sudo brew cask install seil
 
@@ -135,7 +139,7 @@ brew cask install spectacle
 brew cask install kindle
 brew cask install switchresx
 brew cask install gitup
-
+brew cask install java
 brew cask install virtualbox
 brew cask install virtualbox-extension-pack
 
@@ -150,6 +154,7 @@ brew cask install betterzipql
 sudo brew cask install qlimagesize
 brew cask install webpquicklook
 brew cask install suspicious-package
+
 
 # Color Picker plugins
 brew cask install colorpicker-hex
@@ -171,6 +176,12 @@ touch /etc/resolver/localhost
 sudo tee /etc/resolver/localhost >/dev/null <<EOF
 nameserver 127.0.0.1
 EOF
+
+
+
+# Apache
+# https://echo.co/blog/os-x-1010-yosemite-local-development-environment-apache-php-and-mysql-homebrew
+
 
 # Remove outdated versions from the cellar.
 brew cleanup
