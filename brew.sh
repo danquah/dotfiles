@@ -183,6 +183,12 @@ EOF
 # Apache
 # https://echo.co/blog/os-x-1010-yosemite-local-development-environment-apache-php-and-mysql-homebrew
 
+# Mailhog
+brew install mailhog
+ln -sfv /usr/local/opt/mailhog/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mailhog.plist
+go get github.com/mailhog/mhsendmail
+
 # Remove outdated versions from the cellar.
 brew cleanup
 
