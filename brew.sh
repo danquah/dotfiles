@@ -183,34 +183,6 @@ EOF
 # Apache
 # https://echo.co/blog/os-x-1010-yosemite-local-development-environment-apache-php-and-mysql-homebrew
 
-
-# Mailcatcher
-brew install ruby
-sudo gem install mailcatcher
-sudo bash -c 'export TAB=$'"'"'\t'"'"'
-cat > /Library/LaunchDaemons/dk.danquah.mailcatcher.plist <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-${TAB}<key>Label</key>
-${TAB}<string>dk.danquah.mailcatcher</string>
-${TAB}<key>ProgramArguments</key>
-${TAB}<array>
-${TAB}${TAB}<string>sh</string>
-${TAB}${TAB}<string>-i</string>
-${TAB}${TAB}<string>-c</string>
-${TAB}${TAB}<string>$SHELL --login -c "mailcatcher --foreground"</string>
-${TAB}</array>
-${TAB}<key>KeepAlive</key>
-${TAB}<true/>
-${TAB}<key>RunAtLoad</key>
-${TAB}<true/>
-</dict>
-</plist>
-EOF'
-launchctl load /Library/LaunchDaemons/dk.danquah.mailcatcher.plist
-
 # Remove outdated versions from the cellar.
 brew cleanup
 
