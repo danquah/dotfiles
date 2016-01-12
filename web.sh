@@ -63,7 +63,7 @@ LoadModule actions_module libexec/mod_actions.so
   # PHP options
   AddType text/html .php
   AddType application/x-httpd-php .php
-  DirectoryIndex index.php index.html
+  DirectoryIndex index.php index.html index.htm
 </IfModule>
  
 # Include our VirtualHosts
@@ -71,9 +71,13 @@ Include ${USERHOME}/Work/Sites/etc/apache_conf/sites/*.conf
 EOF
 
 
-MODFASTCGIPREFIX=$(brew --prefix mod_fastcgi) 
+
 cat > $(brew --prefix)/etc/apache2/2.4/conf.d/ssl.conf <<EOF
 LoadModule ssl_module libexec/mod_ssl.so
+EOF
+
+cat > $(brew --prefix)/etc/apache2/2.4/conf.d/rewrite.conf <<EOF
+LoadModule rewrite_module libexec/mod_rewrite.so
 EOF
 
 cat > $(brew --prefix)/etc/apache2/2.4/conf.d/vhost_alias.conf <<EOF
@@ -212,6 +216,7 @@ EOF'
 # php
 brew install homebrew/php/php56
 brew install php56-opcache
+brew install php56-xdebug
 mkdir -p /usr/local/etc/php/5.6/conf.d
 cp conf/xxx-custom-php.ini /usr/local/etc/php/5.6/conf.d/
 sed -i "s=%USERHOME%=$USERHOME=g" /usr/local/etc/php/5.6/conf.d/xxx-custom-php.ini
