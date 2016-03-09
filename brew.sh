@@ -114,6 +114,8 @@ brew install composer
 brew install ffmpeg --with-faac
 brew install openssl
 brew link openssl --force
+brew install watch
+
 
 sudo brew cask install karabiner
 sudo brew cask install seil
