@@ -148,8 +148,7 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-alias cb="curl -o /dev/null -s -w "
-\n
+alias cb="curl -o /dev/null -s -w \"\n 
             time_namelookup:  %{time_namelookup}\n
                time_connect:  %{time_connect}\n
             time_appconnect:  %{time_appconnect}\n
@@ -158,9 +157,10 @@ alias cb="curl -o /dev/null -s -w "
          time_starttransfer:  %{time_starttransfer}\n
                             ----------\n
                  time_total:  %{time_total}\n
-\n"
+\n\""
 
 # Enable / disable xdebug on the commandline
 alias xdb='export XDEBUG_CONFIG="profiler_enable=1"'
 alias xdb_off='export XDEBUG_CONFIG="profiler_enable=0"'
+alias npm=gifi
 
