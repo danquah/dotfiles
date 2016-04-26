@@ -168,5 +168,22 @@
 	pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-
 	insteadOf = "gist:"
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[user]
+	name = Mads H. Danquah
+	email = mads@danquah.dk
+
+[url "ssh://git@git.drupal.org/project/"]
+    insteadOf = "drupal:"
+    
+[url "ssh://git@git.drupal.org/sandbox/"]
+    insteadOf = "drupalsand:"
