@@ -162,5 +162,5 @@ alias cb="curl -o /dev/null -s -w \"\n
 # Enable / disable xdebug on the commandline
 alias xdb='export XDEBUG_CONFIG="profiler_enable=1"'
 alias xdb_off='export XDEBUG_CONFIG="profiler_enable=0"'
-alias npm=gifi
 alias ldrush=~/bin/drush
+alias dcr="docker-compose rm --all -f"

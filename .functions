@@ -248,8 +248,8 @@ function tre() {
 # Use drush via docker-compose if available.
 function drush () {
     local git_root=$(git rev-parse --show-toplevel  2> /dev/null)
-    if [[ ! -z "$git_root" && -r "$git_root/docker-compose.yml" ]] && grep -q drush: "$git_root/docker-compose.yml"; then
-        (cd "$git_root" && docker-compose run --rm drush "$@")
+    if [[ ! "${1}" == "deploy" && ! -z "$git_root" && -r "$git_root/docker-compose.yml" ]] && grep -q drush: "$git_root/docker-compose.yml"; then
+        (cd "$git_root" && docker-compose run --no-deps --rm drush "$@")
     else
         command drush "$@"
     fi
