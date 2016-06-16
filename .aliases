@@ -164,4 +164,5 @@ alias xdb='export XDEBUG_CONFIG="profiler_enable=1"'
 alias xdb_off='export XDEBUG_CONFIG="profiler_enable=0"'
 alias ldrush=~/bin/drush
 alias dcr="docker-compose rm --all -v -f"
+alias dka="docker ps -aq | xargs docker rm -fv"
 alias composer="php -n /usr/local/opt/composer/libexec/composer.phar"
