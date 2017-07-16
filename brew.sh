@@ -102,6 +102,11 @@ brew install ffmpeg --with-faac
 brew install openssl
 brew link openssl --force
 brew install watch
+brew install docker docker-machine
+
+brew tap codekitchen/dinghy
+brew install dinghy
+brew install --HEAD xhyve
 
 # Remove outdated versions from the cellar.
 brew cleanup
