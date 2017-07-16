@@ -2,27 +2,15 @@
 
 # Install command-line tools using Homebrew.
 
-# Ask for the administrator password upfront.
-sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until the script has finished.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-brew tap homebrew/versions
-brew tap homebrew/homebrew-php  
-brew tap caskroom/cask
-brew tap homebrew/services
-
-
 # Make sure we’re using the latest Homebrew.
 brew update
 
 # Upgrade any already-installed formulae.
-brew upgrade --all
+brew upgrade
 
-# Install GNU core utilities (those that come with OS X are outdated).
+# Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
-sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 # Install some other useful utilities like `sponge`.
 brew install moreutils
@@ -36,21 +24,24 @@ brew install gnu-sed --with-default-names
 brew install bash
 brew install bash-completion2
 
+# Switch to using brew-installed bash as default shell
+if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
+  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
+  chsh -s /usr/local/bin/bash;
+fi;
+
 # Install `wget` with IRI support.
 brew install wget --with-iri
 
-# Install RingoJS and Narwhal.
-# Note that the order in which these are installed is important;
-# see http://git.io/brew-narwhal-ringo.
-#brew install ringojs
-#brew install narwhal
+# Install GnuPG to enable PGP-signing commits.
+brew install gnupg
 
-# Install more recent versions of some OS X tools.
-brew install vim --override-system-vi
-brew install homebrew/dupes/grep
-brew install homebrew/dupes/openssh
-brew install homebrew/dupes/screen
-#brew install homebrew/php/php55 --with-gmp
+# Install more recent versions of some macOS tools.
+brew install vim --with-override-system-vi
+brew install grep
+#brew install openssh
+brew install screen
+#brew install homebrew/php/php56 --with-gmp
 
 # Install font tools.
 #brew tap bramstein/webfonttools
@@ -86,10 +77,9 @@ brew install tcpflow
 
 # Install other useful binaries.
 brew install ack
-brew install dark-mode
 #brew install exiv2
 brew install git
-#brew install git-lfs
+brew install git-lfs
 brew install imagemagick --with-webp
 #brew install lua
 brew install lynx
@@ -97,99 +87,21 @@ brew install lynx
 brew install pigz
 #brew install pv
 #brew install rename
-#brew install rhino
-brew install speedtest_cli
 brew install ssh-copy-id
 brew install tree
-#brew install webkit2png
+#brew install vbindiff
 #brew install zopfli
-brew install hub
+
 # MHD Additions
+brew install speedtest_cli
+brew install hub
 brew install curl
 brew install wget
 brew install the_silver_searcher
-brew install node
-
-brew install composer
 brew install ffmpeg --with-faac
 brew install openssl
 brew link openssl --force
 brew install watch
-
-
-sudo brew cask install karabiner
-sudo brew cask install seil
-
-brew cask install dropbox
-brew cask install alfred
-brew cask install sourcetree
-brew cask install iterm2
-brew cask install firefox
-brew cask install skitch
-brew cask install spotify
-brew cask install transmit
-brew cask install vagrant
-brew cask install istat-menus
-brew cask install sequel-pro
-brew cask install vlc
-brew cask install the-unarchiver
-brew cask install daisydisk
-brew cask install sourcetree
-brew cask install flowdock
-brew cask install vox
-brew cask install carbon-copy-cloner
-brew cask install spectacle
-brew cask install kindle
-brew cask install switchresx
-brew cask install gitup
-brew cask install java
-brew cask install virtualbox
-brew cask install virtualbox-extension-pack
-
-# Quick Look plugins
-brew cask install qlcolorcode
-brew cask install qlstephen
-brew cask install qlmarkdown
-brew cask install quicklook-json
-brew cask install qlprettypatch
-brew cask install quicklook-csv
-brew cask install betterzipql
-sudo brew cask install qlimagesize
-brew cask install webpquicklook
-brew cask install suspicious-package
-
-
-# Color Picker plugins
-brew cask install colorpicker-hex
-
-brew install dnsmasq
-# Setup our own conf with *.localhost -> 127.0.0.1
-cp conf/dnsmasq.conf /usr/local/etc/dnsmasq.conf
-
-# Configure a LaunchDeamon
-sudo cp -fv /usr/local/opt/dnsmasq/*.plist /Library/LaunchDaemons
-sudo chown root /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
-
-# Start the deamon manually.
-sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist  
-
-# Setup local lookups of *.localhost to go to dnsmasq
-sudo mkdir -p /etc/resolver/
-touch /etc/resolver/localhost 
-sudo tee /etc/resolver/localhost >/dev/null <<EOF
-nameserver 127.0.0.1
-EOF
-
-
-
-# Apache
-# https://echo.co/blog/os-x-1010-yosemite-local-development-environment-apache-php-and-mysql-homebrew
-
-# Mailhog
-brew install mailhog
-ln -sfv /usr/local/opt/mailhog/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mailhog.plist
-go get github.com/mailhog/mhsendmail
 
 # Remove outdated versions from the cellar.
 brew cleanup
