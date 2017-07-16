@@ -1,0 +1,9 @@
+*~
+.DS_Store
+.idea
+.otto
+.ottoid
+.bundle
+vendor
+phpcs-checkstyle.xml
+.dce_container

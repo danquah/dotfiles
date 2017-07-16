@@ -137,6 +137,9 @@
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
 
+[credential]
+	helper = osxkeychain
+
 [diff]
 
 	# Detect copies as well as renames
@@ -201,6 +204,7 @@
 [user]
 	name = Mads H. Danquah
 	email = mads@danquah.dk
+	useconfigonly = false
 
 [url "ssh://git@git.drupal.org/project/"]
     insteadOf = "drupal:"
