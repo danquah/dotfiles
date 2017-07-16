@@ -33,6 +33,9 @@
 	branches = branch -a
 	remotes = remote -v
 
+	# List aliases
+	aliases = config --get-regexp alias
+
 	# Amend the currently staged files to the latest commit
 	amend = commit --amend --reuse-message=HEAD
 
@@ -64,12 +67,16 @@
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
 
-	# Merge GitHub pull request on top of the `master` branch
+	# Merge GitHub pull request on top of the current branch or,
+	# if a branch name is specified, on top of the specified branch
 	mpr = "!f() { \
+		declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
+		declare branch=\"${2:-$currentBranch}\"; \
 		if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
 			git fetch origin refs/pull/$1/head:pr/$1 && \
-			git rebase master pr/$1 && \
-			git checkout master && \
+			git checkout -B $branch && \
+			git rebase $branch pr/$1 && \
+			git checkout -B $branch && \
 			git merge pr/$1 && \
 			git branch -D pr/$1 && \
 			git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
@@ -92,7 +99,7 @@
 	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
 	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
-	# Make `git rebase` safer on OS X
+	# Make `git rebase` safer on macOS
 	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
 	trustctime = false
 
@@ -125,12 +132,24 @@
 	changed = green
 	untracked = cyan
 
+[commit]
+
+	# https://help.github.com/articles/signing-commits-using-gpg/
+	gpgsign = true
+
+[credential]
+	helper = osxkeychain
+
 [diff]
 
 	# Detect copies as well as renames
 	renames = copies
+	# Enable an experimental heuristic that shifts the hunk boundary in an
+	# attempt to make the resulting patch easier to read.
+	indentHeuristic = true
 
 [diff "bin"]
+
 	# Use `hexdump` to diff binary files
 	textconv = hexdump -v -C
 
@@ -149,7 +168,7 @@
 	# Use the Git 1.x.x default to avoid errors on machines with old Git
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
-	default = matching
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
@@ -185,6 +204,7 @@
 [user]
 	name = Mads H. Danquah
 	email = mads@danquah.dk
+	useconfigonly = false
 
 [url "ssh://git@git.drupal.org/project/"]
     insteadOf = "drupal:"

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make vim the default editor.
 export EDITOR='vim';
 
@@ -27,5 +29,21 @@ export LESS_TERMCAP_md="${yellow}";
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
+# MHD
 export r=/Users/danquah/Work/Reload
 export p=/Users/danquah/Work/Priv
+
+export HOMEBREW_GITHUB_API_TOKEN=66337d4395fc807b6ca0cf24f94c7844cbb403f7
+
+# Wrap "git" in the hub command
+eval "$(hub alias -s)"
+
+export GOPATH=$HOME/Work/Go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$HOME/.composer/vendor/bin
